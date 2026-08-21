@@ -142,28 +142,28 @@ export const services: Service[] = [
 export const principles = [
   {
     index: "01",
-    title: "Less bloat",
-    body: "No twelve-page decks before a single pixel. We start work in week one and show it early.",
+    title: "We skip the fluff",
+    body: "No endless slide decks or bloated discovery phases. We start designing and building immediately, showing you real progress as early as week one.",
   },
   {
     index: "02",
-    title: "Direct communication",
-    body: "You talk to the people designing and building it. No relay, no account layer, no theatre.",
+    title: "You talk to the makers",
+    body: "There are no account managers here. You collaborate directly with the designers and engineers who are actually bringing your vision to life.",
   },
   {
     index: "03",
-    title: "Focused design",
-    body: "We keep the work focused on what the product actually needs. If an element doesn't serve a clear function, we remove it.",
+    title: "Design with purpose",
+    body: "We strip away the unnecessary. If a feature or layout doesn't serve a clear function for your users, we cut it.",
   },
   {
     index: "04",
-    title: "Engineering that lasts",
-    body: "Clean, typed, documented code. You should be able to hand it to anyone in two years.",
+    title: "Code you can keep",
+    body: "We build robust, documented systems. When it's time to hand over the project, your team will actually enjoy working with our code.",
   },
   {
     index: "05",
-    title: "Custom builds",
-    body: "We work around the actual problem instead of starting from a template.",
+    title: "Handcrafted solutions",
+    body: "We solve your unique problems from the ground up. No shortcuts, no forcing your business into a pre-made template.",
   },
 ];
 

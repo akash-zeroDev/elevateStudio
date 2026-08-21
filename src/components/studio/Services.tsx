@@ -39,17 +39,14 @@ export function Services() {
                 )}
               >
                 <div className="flex h-full flex-col justify-between gap-8">
-                  <div className="flex justify-between items-start">
-                    <span className="font-display text-xs font-bold tracking-[0.2em] text-accent">
-                      {s.index}
-                    </span>
+                  <div className="flex justify-end items-start h-8">
                     <span className="font-display text-2xl opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 text-accent">
                       ↗
                     </span>
                   </div>
                   
                   <div>
-                    <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl uppercase leading-[0.9] tracking-[-0.02em] mb-4 transition-transform duration-500 group-hover:translate-x-2 break-words hyphens-auto">
+                    <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl uppercase leading-[0.9] tracking-[-0.02em] mb-4 transition-transform duration-500 group-hover:translate-x-2 break-words">
                       {s.title}
                     </h3>
                     <p className="text-sm md:text-base leading-relaxed text-muted-foreground group-hover:text-foreground transition-colors duration-500 max-w-md">

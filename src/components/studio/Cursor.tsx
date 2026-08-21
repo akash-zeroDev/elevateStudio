@@ -31,11 +31,11 @@ export function Cursor() {
   const size = mode === "view" ? 72 : mode === "link" ? 40 : 14;
 
   return (
-    <motion.div
-      aria-hidden="true"
-      className="pointer-events-none fixed left-0 top-0 z-[100] hidden md:block"
-      style={{ x: sx, y: sy }}
-    >
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none fixed left-0 top-0 z-[9999] hidden md:block"
+        style={{ x: sx, y: sy }}
+      >
       <motion.div
         className="flex items-center justify-center rounded-full border border-accent"
         animate={{

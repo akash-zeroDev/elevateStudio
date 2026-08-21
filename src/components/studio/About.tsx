@@ -1,90 +1,82 @@
-import { expertise, stack, studio } from "@/data/studio";
+import { studio } from "@/data/studio";
 import { LineReveal, Reveal, Section } from "./primitives";
+import founderImg from "@/assets/founder.png";
 
 export function About() {
   return (
-    <Section id="about" label={{ index: "05", text: "About the studio" }}>
-      <h2 className="display-xl text-[11vw] leading-[0.88] lg:text-[7vw]">
-        <LineReveal
-          lines={[
-            <>About the</>,
-            <>
-              <span className="italic font-normal lowercase text-accent">studio.</span>
-            </>,
-          ]}
-        />
-      </h2>
+    <Section id="about" className="overflow-visible">
+      <div className="grid gap-16 lg:gap-8 lg:grid-cols-12 items-start pt-12">
+        
+        {/* Left Column: Massive Typography & Copy */}
+        <div className="flex flex-col lg:col-span-6 lg:pr-8">
+          <h2 className="display-xl text-[12vw] leading-[0.88] lg:text-[7vw] mb-12">
+            <LineReveal
+              lines={[
+                <>ABOUT THE</>,
+                <>
+                  <span className="font-serif italic text-foreground/80">studio.</span>
+                </>,
+              ]}
+            />
+          </h2>
+          
+          <div className="flex flex-col gap-8 mt-4">
+            <Reveal>
+              <p className="text-xl md:text-2xl leading-relaxed text-foreground/90 font-light max-w-xl">
+                We are a dedicated duo working directly with founders and small teams. Backed by a short bench of trusted collaborators for motion, copy and photography when a project calls for it.
+              </p>
+            </Reveal>
 
-      <div className="mt-16 grid gap-12 lg:grid-cols-12">
-        <div className="space-y-6 lg:col-span-5 lg:col-start-7">
-          <Reveal>
-            <p className="text-base leading-relaxed text-foreground/85">
-              {studio.fullName} is a small independent studio working directly with founders and 
-              small teams. One lead designer-engineer, a short bench of trusted collaborators for 
-              motion, copy and photography when a project calls for it.
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="text-base leading-relaxed text-muted-foreground">
-              That means fewer projects at once, faster decisions, and the person you brief is the
-              person doing the work. We're not trying to become an agency. We're trying to keep the
-              work good.
-            </p>
-          </Reveal>
+            <Reveal delay={0.1}>
+              <p className="text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl">
+                That means fewer projects at once, faster decisions, and the people you brief are the people doing the work. We're not trying to become an agency. We're trying to keep the work good.
+              </p>
+            </Reveal>
+          </div>
+        </div>
 
-          {/* Founder Profile Block */}
-          <Reveal delay={0.2}>
-            <div className="mt-8 flex items-center gap-5 rounded-2xl border border-border/50 bg-surface/30 p-4 backdrop-blur-sm sm:p-5">
-              <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border border-border/50 bg-surface sm:h-20 sm:w-20">
-                {/* Placeholder Image - You can replace this src with your own photo later */}
+        {/* Right Column: Subtle Minimal Portraits */}
+        <div className="lg:col-span-5 lg:col-start-8 flex flex-col sm:flex-row lg:flex-col gap-8 justify-center mt-8 lg:mt-32">
+          
+          {/* Card 1: Founder */}
+          <Reveal delay={0.3}>
+            <div className="group flex flex-col gap-4">
+              <div className="relative h-48 w-40 sm:h-56 sm:w-48 overflow-hidden rounded-xl border border-border/40 bg-surface">
                 <img 
-                  src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=200&auto=format&fit=crop" 
-                  alt="Founder" 
-                  className="h-full w-full object-cover grayscale transition-all duration-500 hover:grayscale-0"
+                  src={founderImg} 
+                  alt={studio.founderName}
+                  className="h-full w-full object-cover grayscale opacity-80 transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
                 />
               </div>
-              <div>
-                <h3 className="font-display text-xl tracking-[0.02em] sm:text-2xl text-foreground">
+              <div className="flex flex-col gap-1">
+                <h4 className="font-display text-xl tracking-tight text-foreground">
                   {studio.founderName}
-                </h3>
-                <p className="label-meta mt-1">Founder & Lead Engineer</p>
+                </h4>
+                <p className="label-meta text-muted-foreground text-[10px]">FOUNDER & LEAD ENGINEER</p>
               </div>
             </div>
           </Reveal>
-        </div>
 
-        <dl className="grid grid-cols-2 gap-x-6 gap-y-10 self-start lg:col-span-5 lg:col-start-1 lg:row-start-1">
-          <div>
-            <dt className="label-meta">Based in</dt>
-            <dd className="mt-2 font-display text-lg uppercase tracking-[-0.01em]">{studio.location}</dd>
-          </div>
-          <div>
-            <dt className="label-meta">Availability</dt>
-            <dd className="mt-2 font-display text-lg uppercase tracking-[-0.01em] text-accent">
-              Q3 2026 — open
-            </dd>
-          </div>
-          <div className="col-span-2">
-            <dt className="label-meta">Expertise</dt>
-            <dd className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
-              {expertise.map((e) => (
-                <span key={e} className="text-sm text-foreground/85">
-                  {e}
-                </span>
-              ))}
-            </dd>
-          </div>
-          <div className="col-span-2">
-            <dt className="label-meta">Tools &amp; technologies</dt>
-            <dd className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
-              {stack.map((t) => (
-                <span key={t} className="text-sm text-muted-foreground">
-                  {t}
-                </span>
-              ))}
-            </dd>
-          </div>
-        </dl>
+          {/* Card 2: Rishu */}
+          <Reveal delay={0.4}>
+            <div className="group flex flex-col gap-4 lg:ml-24">
+              <div className="relative h-48 w-40 sm:h-56 sm:w-48 overflow-hidden rounded-xl border border-border/40 bg-surface">
+                <img 
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" 
+                  alt="Rishu"
+                  className="h-full w-full object-cover grayscale opacity-80 transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <h4 className="font-display text-xl tracking-tight text-foreground">
+                  Rishu
+                </h4>
+                <p className="label-meta text-muted-foreground text-[10px]">CO-FOUNDER & MARKETER</p>
+              </div>
+            </div>
+          </Reveal>
+
+        </div>
       </div>
     </Section>
   );

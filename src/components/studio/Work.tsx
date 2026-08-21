@@ -67,16 +67,13 @@ export function Work() {
                 className="flex flex-col gap-4"
               >
                 <div className="flex items-center gap-4">
-                  <span className="font-display text-xs font-bold tracking-[0.2em] text-accent">
-                    {activeProject.index}
-                  </span>
                   <span className="label-meta tracking-[0.15em] text-foreground/70">
                     {activeProject.category}
                   </span>
                 </div>
                 
                 {/* Adjusted text size so it doesn't overflow and hit the cards */}
-                <h2 className="font-display text-5xl font-medium uppercase leading-[0.9] tracking-[-0.02em] sm:text-6xl lg:text-[5.5rem] xl:text-[6.5rem] break-words">
+                <h2 className="font-display text-4xl font-medium leading-[0.95] tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl break-words">
                   {activeProject.name}
                 </h2>
                 
