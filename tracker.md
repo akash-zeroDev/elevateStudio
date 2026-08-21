@@ -1,0 +1,86 @@
+# Project Tracker
+
+**Rules:**
+- Do not generate arbitrary files (wait for user's code).
+- Always remove comments from provided code.
+
+## Completed
+- Initialized Vite + React + TS template.
+- Installed `motion`, `clsx`, `tailwind-merge`.
+- Configured Tailwind CSS v4 and paths.
+- Added `use-mobile.ts` hook.
+- Added dummy data in `src/data/index.ts`.
+- Added `Hero.tsx` component.
+- Added `About.tsx` component.
+- Added `Contact.tsx` component.
+- Added `Cursor.tsx` component.
+- Added `Faq.tsx` component.
+- Added `Footer.tsx` component.
+- Added `Metrics.tsx` component.
+- Added `Navbar.tsx` component.
+- Added `Philosophy.tsx` component.
+- Added `primitives.tsx` component.
+- Added `Process.tsx` component.
+- Added `Services.tsx` component.
+- Added `Testimonials.tsx` component.
+- Added `Work.tsx` component.
+- Added `ui/accordion.tsx` component.
+- Added `ui/alert-dialog.tsx` component.
+- Added `ui/alert.tsx` component.
+- Added `ui/aspect-ratio.tsx` component.
+- Added `ui/avatar.tsx` component.
+- Added `ui/badge.tsx` component.
+- Added `ui/breadcrumb.tsx` component.
+- Added `ui/button.tsx` component.
+- Added `ui/calendar.tsx` component.
+- Added `ui/card.tsx` component.
+- Added `ui/carousel.tsx` component.
+- Added `ui/chart.tsx` component.
+- Added `ui/checkbox.tsx` component.
+- Added `ui/collapsible.tsx` component.
+- Added `ui/command.tsx` component.
+- Added `ui/context-menu.tsx` component.
+- Added `ui/dialog.tsx` component.
+- Added `ui/drawer.tsx` component.
+- Added `ui/dropdown-menu.tsx` component.
+- Added `ui/form.tsx` component.
+- Added `ui/hover-card.tsx` component.
+- Added `ui/input-otp.tsx` component.
+- Added `ui/input.tsx` component.
+- Added `ui/label.tsx` component.
+- Added `ui/menubar.tsx` component.
+- Added `ui/navigation-menu.tsx` component.
+- Added `ui/pagination.tsx` component.
+- Added `ui/popover.tsx` component.
+- Added `ui/progress.tsx` component.
+- Added `ui/radio-group.tsx` component.
+- Added `ui/resizable.tsx` component.
+- Added `ui/scroll-area.tsx` component.
+- Added `ui/select.tsx` component.
+- Added `ui/separator.tsx` component.
+- Added `ui/sheet.tsx` component.
+- Added `ui/sidebar.tsx` component.
+- Added `ui/skeleton.tsx` component.
+- Added `ui/slider.tsx` component.
+- Added `ui/sonner.tsx` component.
+- Added `ui/switch.tsx` component.
+- Added `ui/table.tsx` component.
+- Added `ui/tabs.tsx` component.
+- Added `ui/textarea.tsx` component.
+- Added `ui/toggle-group.tsx` component.
+- Added `ui/toggle.tsx` component.
+- Added `ui/tooltip.tsx` component.
+- Added `lib/utils.ts`
+- Added `lib/error-capture.ts`
+- Added `lib/error-page.ts`
+- Added `lib/lovable-error.ts`
+- Added `routes/__root.tsx`
+- Added `routes/index.tsx`
+- Added `router.tsx`
+- Added `routeTree.gen.ts`
+- Added `server.ts`
+- Added `start.ts`
+- Added `styles.css`
+
+## Missing Components / Pending Code
+- `src/assets/elevate-studio-logo.png.asset.json` (required by `Navbar.tsx`)
