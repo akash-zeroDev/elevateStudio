@@ -87,11 +87,6 @@ export function Section({
 }) {
   return (
     <section id={id} className={cn("relative border-t border-border px-5 py-24 sm:px-8 md:py-32 lg:px-14", className)}>
-      {label && (
-        <div className="mb-12 md:mb-20">
-          <SectionLabel index={label.index}>{label.text}</SectionLabel>
-        </div>
-      )}
       {children}
     </section>
   );

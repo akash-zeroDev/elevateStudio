@@ -16,6 +16,31 @@ export function Hero() {
       ref={ref}
       className="grain relative flex min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden px-5 pb-10 pt-32 sm:px-8 lg:px-14"
     >
+      {/* Dynamic Ambient Aurora Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Deep background base */}
+        <div className="absolute inset-0 bg-background/90" />
+        
+        {/* Animated Liquid Orbs */}
+        <motion.div 
+          animate={{ x: ["0%", "10%", "-5%", "0%"], y: ["0%", "-10%", "5%", "0%"], scale: [1, 1.2, 0.9, 1] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute -top-[10%] -left-[10%] w-[50vw] h-[50vw] rounded-full bg-accent/20 blur-[100px] mix-blend-screen"
+        />
+        <motion.div 
+          animate={{ x: ["0%", "-15%", "10%", "0%"], y: ["0%", "15%", "-10%", "0%"], scale: [1, 0.8, 1.3, 1] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[20%] -right-[10%] w-[60vw] h-[60vw] rounded-full bg-purple-600/15 blur-[120px] mix-blend-screen"
+        />
+        <motion.div 
+          animate={{ x: ["0%", "20%", "-15%", "0%"], y: ["0%", "-20%", "15%", "0%"], scale: [1, 1.1, 0.8, 1] }}
+          transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+          className="absolute -bottom-[20%] left-[20%] w-[70vw] h-[50vw] rounded-full bg-indigo-600/15 blur-[120px] mix-blend-screen"
+        />
+        
+        {/* Glassmorphism Blur Overlay for Liquid Smoothing */}
+        <div className="absolute inset-0 bg-background/20 backdrop-blur-[60px]" />
+      </div>
       <motion.div 
         style={{ opacity: reduced ? 1 : fade, y: reduced ? 0 : y }} 
         className="relative flex w-full max-w-[1400px] flex-col items-center justify-center"

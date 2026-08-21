@@ -5,11 +5,14 @@ import { cn } from "@/lib/utils";
 export function Services() {
   return (
     <Section id="services" label={{ index: "02", text: "Capabilities" }}>
-      <div className="mb-14 grid gap-6 lg:grid-cols-12">
-        <h2 className="display-xl text-[10vw] leading-[0.9] lg:col-span-7 lg:text-[6.5vw]">
-          <LineReveal lines={[<>What we</>, <>do.</>]} />
+      <div className="mb-16 flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
+        <h2 className="display-xl text-[12vw] leading-[0.85] tracking-tighter lg:text-[8.5vw]">
+          <LineReveal lines={[
+            <>What we</>, 
+            <><span className="text-accent italic">do.</span></>
+          ]} />
         </h2>
-        <p className="max-w-sm self-end text-sm leading-relaxed text-muted-foreground lg:col-span-4 lg:col-start-9">
+        <p className="max-w-md text-base md:text-lg leading-relaxed text-muted-foreground pb-2">
           Six things, done properly. If a project needs something outside this list, we'll say so
           rather than improvise.
         </p>
@@ -31,11 +34,11 @@ export function Services() {
               <div 
                 key={s.title} 
                 className={cn(
-                  "group relative border-r-4 border-b-4 border-border/20 p-8 sm:p-12 hover:bg-surface/60 transition-colors duration-500",
+                  "group relative border-r-4 border-b-4 border-border/20 p-6 sm:p-8 hover:bg-surface/60 transition-colors duration-500",
                   colSpan
                 )}
               >
-                <div className="flex h-full flex-col justify-between gap-16">
+                <div className="flex h-full flex-col justify-between gap-8">
                   <div className="flex justify-between items-start">
                     <span className="font-display text-xs font-bold tracking-[0.2em] text-accent">
                       {s.index}
@@ -46,16 +49,16 @@ export function Services() {
                   </div>
                   
                   <div>
-                    <h3 className="font-display text-4xl sm:text-5xl lg:text-6xl uppercase leading-[0.9] tracking-[-0.02em] mb-6 transition-transform duration-500 group-hover:translate-x-2">
+                    <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl uppercase leading-[0.9] tracking-[-0.02em] mb-4 transition-transform duration-500 group-hover:translate-x-2 break-words hyphens-auto">
                       {s.title}
                     </h3>
-                    <p className="text-base leading-relaxed text-muted-foreground group-hover:text-foreground transition-colors duration-500 max-w-md">
+                    <p className="text-sm md:text-base leading-relaxed text-muted-foreground group-hover:text-foreground transition-colors duration-500 max-w-md">
                       {s.blurb}
                     </p>
 
-                    <ul className="flex flex-wrap gap-x-3 gap-y-3 mt-8">
+                    <ul className="flex flex-wrap gap-x-2 gap-y-2 mt-6">
                       {s.includes.map((item) => (
-                        <li key={item} className="label-meta text-foreground/60 border border-border/40 rounded-full px-4 py-1.5 backdrop-blur-md bg-surface/50">
+                        <li key={item} className="label-meta text-[10px] sm:text-xs text-foreground/60 border border-border/40 rounded-full px-3 py-1 backdrop-blur-md bg-surface/50">
                           {item}
                         </li>
                       ))}
@@ -65,7 +68,7 @@ export function Services() {
 
                 {/* Plus Intersection Icon */}
                 {(index === 0 || index === 2) && (
-                  <div className="absolute -bottom-[20px] -right-[20px] z-10 hidden md:flex h-10 w-10 items-center justify-center rounded-full border-4 border-border/20 bg-background text-accent font-display text-xl">
+                  <div className="absolute -bottom-[18px] -right-[18px] z-10 hidden md:flex h-8 w-8 items-center justify-center rounded-full border-4 border-border/20 bg-background text-accent font-display text-lg">
                     +
                   </div>
                 )}
