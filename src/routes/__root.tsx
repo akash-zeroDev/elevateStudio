@@ -7,7 +7,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -108,6 +108,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 import { Navbar } from "@/components/studio/Navbar";
 import { Footer } from "@/components/studio/Footer";
 import { Cursor } from "@/components/studio/Cursor";
+import { Preloader } from "@/components/studio/Preloader";
 
 function AmbientBackground() {
   return (
@@ -125,6 +126,8 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <HeadContent />
+      
+      <Preloader />
       
       <div className="relative min-h-screen bg-background md:cursor-none z-0 flex flex-col">
         <AmbientBackground />

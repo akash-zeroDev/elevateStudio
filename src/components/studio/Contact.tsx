@@ -71,7 +71,12 @@ export function Contact() {
     e.currentTarget.style.setProperty("--my", `${e.clientY - rect.top}px`);
   };
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit(async (formData) => {
+    // Ensure services is always an array for the API
+    const data = {
+      ...formData,
+      services: formData.services ?? [],
+    } as const;
     setSubmitting(true);
     try {
       await submitInquiry({ data });

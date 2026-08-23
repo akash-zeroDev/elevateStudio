@@ -9,7 +9,7 @@ export function Faq() {
   const reduced = useReducedMotion();
 
   return (
-    <Section label={{ index: "07", text: "Questions" }} className="bg-surface/40">
+    <Section className="bg-surface/40">
       <div className="grid gap-10 lg:grid-cols-12">
         <h2 className="display-xl text-[10vw] leading-[0.9] lg:col-span-4 lg:text-[4.5vw]">
           <LineReveal lines={[<>Questions.</>]} />

@@ -146,8 +146,9 @@ export function Hero() {
         <motion.div
           initial={reduced ? false : { opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-          className="w-full flex justify-start mb-16 md:mb-24 group cursor-default"
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 3.05 }}
+          className="w-full flex justify-start mb-16 md:mb-24 group cursor-default animate-el-rise"
+          style={{ animationDelay: "3.05s" }}
         >
           <h1 
             className="text-lg md:text-xl lg:text-2xl text-foreground/90 uppercase leading-[0.85] tracking-tight transition-transform duration-500 group-hover:scale-[1.02]"
@@ -170,17 +171,17 @@ export function Hero() {
             className="w-full"
           >
             <h2 className="text-[14vw] md:text-[10vw] lg:text-[9vw] leading-[0.85] font-display font-medium uppercase tracking-tight text-foreground flex flex-col">
-              <span className="block">DESIGNING</span>
+              <span className="block animate-el-rise" style={{ animationDelay: "3.2s" }}>DESIGNING</span>
               <span className="flex items-center gap-3 md:gap-6 mt-1 md:mt-3 flex-wrap">
-                DIGITAL 
+                <span className="animate-el-rise" style={{ animationDelay: "3.3s" }}>DIGITAL</span>
                 
                 {/* Physical Highlighted Pill */}
                 <motion.span 
                   initial={reduced ? false : { opacity: 0, scale: 0.9, rotate: 0 }}
                   animate={{ opacity: 1, scale: 1, rotate: -2 }}
-                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
+                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 3.4 }}
                   style={{ x: reduced ? 0 : parallaxPillX, y: reduced ? 0 : parallaxPillY }}
-                  className="relative inline-flex items-center justify-center bg-accent text-black rounded-[3rem] px-6 md:px-10 pb-1 md:pb-2 pt-1.5 md:pt-3 shadow-[0_0_40px_rgba(212,246,61,0.2)] mx-2 cursor-crosshair group transition-colors duration-500 hover:bg-[#E2FF54]"
+                  className="relative inline-flex items-center justify-center bg-accent text-black rounded-[3rem] px-6 md:px-10 pb-1 md:pb-2 pt-1.5 md:pt-3 shadow-[0_0_40px_rgba(212,246,61,0.2)] mx-2 cursor-crosshair group transition-colors duration-500 hover:bg-[#E2FF54] animate-el-rise"
                 >
                   <span className="relative z-10 transition-all duration-500 group-hover:tracking-wider">
                     PRODUCTS
@@ -199,7 +200,7 @@ export function Hero() {
             className="w-full mt-2 md:mt-4 pl-2 md:pl-32 lg:pl-48"
           >
              <h2 className="text-[12vw] md:text-[8vw] lg:text-[7vw] leading-[0.85] font-serif italic text-foreground/80 tracking-tight normal-case">
-               and engineering.
+               <span className="animate-el-wipe inline-block" style={{ animationDelay: "3.5s" }}>and engineering.</span>
              </h2>
           </motion.div>
 
@@ -207,10 +208,11 @@ export function Hero() {
           <motion.div
             initial={reduced ? false : { opacity: 0, clipPath: "inset(0 100% 0 0)" }}
             animate={{ opacity: 1, clipPath: "inset(0 0% 0 0)" }}
-            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.9 }}
+            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 3.6 }}
             onMouseEnter={() => velocityFactor.set(0.2)}
             onMouseLeave={() => velocityFactor.set(1)}
-            className="w-[120vw] -ml-[10vw] mt-16 md:mt-24 lg:mt-32 -rotate-2 relative z-20 pointer-events-auto"
+            className="w-[120vw] -ml-[10vw] mt-16 md:mt-24 lg:mt-32 -rotate-2 relative z-20 pointer-events-auto animate-el-rise"
+            style={{ animationDelay: "3.6s" }}
           >
              <div className="overflow-hidden rounded-[5rem] bg-indigo-600/95 backdrop-blur-md h-[12vw] sm:h-[9vw] md:h-[7vw] lg:h-[5.5vw] flex items-center shadow-[0_0_50px_rgba(79,70,229,0.2)] border border-white/10 cursor-ew-resize transition-transform duration-500 hover:scale-[1.01]">
                 <motion.div 
@@ -238,12 +240,12 @@ export function Hero() {
         {/* ============================================================== */}
         {/* 3. SUPPORTING EDITORIAL DETAILS                                */}
         {/* ============================================================== */}
-        <div className="w-full flex justify-between items-end mt-12 md:mt-0 relative z-10 pointer-events-none">
+        <div className="w-full flex justify-between items-end mt-12 md:mt-0 relative z-10 pointer-events-none animate-el-rise" style={{ animationDelay: "3.8s" }}>
            
            <motion.div
              initial={reduced ? false : { opacity: 0 }}
              animate={{ opacity: 1 }}
-             transition={{ duration: 1.5, delay: 1.1 }}
+             transition={{ duration: 1.5, delay: 3.8 }}
              className="hidden md:flex flex-col gap-1 items-start justify-end"
            >
              <div className="w-2 h-2 rounded-full bg-accent mb-2 animate-pulse shadow-[0_0_10px_rgba(212,246,61,0.5)]" />

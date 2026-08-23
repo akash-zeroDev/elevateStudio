@@ -1,15 +1,24 @@
-import { useState, type FormEvent } from "react";
-import { ArrowUpRight, Plus } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowUpRight } from "lucide-react";
 import elLogo from "@/assets/elevate-studio-logo.png";
 
 const columns = [
   {
     title: "Studio",
-    links: ["How we work", "Services", "Selected work", "Process", "About"],
+    links: [
+      { label: "How we work", href: "/#work" },
+      { label: "Services", href: "/#services" },
+      { label: "Selected work", href: "/#work" },
+      { label: "Process", href: "/studio" },
+      { label: "About", href: "/studio" },
+    ],
   },
   {
     title: "Company",
-    links: ["Contact", "Journal", "Careers", "Privacy policy"],
+    links: [
+      { label: "Contact", href: "/contact" },
+      { label: "Privacy policy", href: "/privacy-policy" },
+    ],
   },
 ];
 
@@ -47,14 +56,14 @@ export function Footer() {
                   </p>
                   <ul className="mt-5 space-y-3">
                     {col.links.map((link) => (
-                      <li key={link}>
-                        <a
-                          href="#"
+                      <li key={link.label}>
+                        <Link
+                          to={link.href}
                           className="group inline-flex items-center gap-1.5 font-display text-[0.95rem] font-semibold text-foreground transition-colors hover:text-accent"
                         >
-                          <span>{link}</span>
+                          <span>{link.label}</span>
                           <ArrowUpRight className="h-3.5 w-3.5 text-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -67,10 +76,6 @@ export function Footer() {
         <div className="mt-10 flex flex-col gap-3 border-t border-border py-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-display text-[0.65rem] tracking-[0.2em] text-muted-foreground uppercase">
             © {new Date().getFullYear()} Elevate Studio. All rights reserved.
-          </p>
-          <p className="flex items-center gap-2 font-display text-[0.65rem] tracking-[0.2em] text-muted-foreground uppercase">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-            Available for two projects
           </p>
         </div>
       </div>

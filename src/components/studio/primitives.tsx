@@ -78,12 +78,10 @@ export function Section({
   id,
   children,
   className,
-  label,
 }: {
   id?: string;
   children: ReactNode;
   className?: string;
-  label?: { index: string; text: string };
 }) {
   return (
     <section id={id} className={cn("relative border-t border-border px-5 py-24 sm:px-8 md:py-32 lg:px-14", className)}>

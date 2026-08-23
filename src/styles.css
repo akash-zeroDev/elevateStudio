@@ -171,3 +171,69 @@
     transform-origin: left;
   }
 }
+
+/* Preloader Animations */
+@keyframes el-mark-in {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.94);
+    filter: blur(6px);
+    letter-spacing: 0.4em;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    letter-spacing: 0.02em;
+  }
+}
+
+@keyframes el-mark-out {
+  to {
+    opacity: 0;
+    transform: translateY(-14px);
+    filter: blur(4px);
+  }
+}
+
+@keyframes el-curtain {
+  from { clip-path: inset(0 0 0 0); }
+  to { clip-path: inset(0 0 100% 0); }
+}
+
+@utility animate-el-mark-in {
+  animation: el-mark-in 1.15s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@utility animate-el-mark-out {
+  animation: el-mark-out 0.55s cubic-bezier(0.65, 0, 0.35, 1) 1.9s both;
+}
+
+@utility animate-el-curtain {
+  animation: el-curtain 1s cubic-bezier(0.76, 0, 0.24, 1) 2.25s both;
+}
+
+@utility animate-el-rise {
+  animation: fade-up 0.8s ease-out both;
+}
+
+@utility animate-el-wipe {
+  animation: wipe-in 0.6s ease-out both;
+}
+
+@keyframes fade-up {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes wipe-in {
+  0% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-el-preloader * {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+  }
+}

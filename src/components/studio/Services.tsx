@@ -18,7 +18,7 @@ export function Services() {
   }, []);
 
   return (
-    <Section id="services" label={{ index: "02", text: "Capabilities" }}>
+    <Section id="services">
       
       {/* Intro Composition exactly as provided */}
       <div className="mb-24 flex flex-col items-start md:flex-row md:items-end md:justify-between w-full relative z-10 intro-stage">

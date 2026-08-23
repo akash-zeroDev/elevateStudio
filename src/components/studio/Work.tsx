@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from "motion/react";
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "motion/react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -161,7 +161,7 @@ export function Work() {
             {!isImmersive && (
               <motion.div 
                 key="carousel"
-                className="mt-12 w-full lg:mt-0 lg:w-[50%] overflow-hidden relative pb-10"
+                className="mt-12 w-full lg:mt-0 lg:w-[50%] overflow-hidden relative pb-10 pointer-events-auto"
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 50 }}

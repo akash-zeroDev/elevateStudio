@@ -27,7 +27,7 @@ export function Navbar() {
   return (
     <>
       <header className="pointer-events-none fixed inset-x-0 top-6 z-[70] px-5 sm:px-8 lg:px-14">
-        <div className="relative flex w-full items-center justify-end">
+        <div className="relative flex w-full items-center justify-end animate-el-rise" style={{ animationDelay: "3.15s" }}>
           
           {/* Mobile Menu Button */}
           <button
