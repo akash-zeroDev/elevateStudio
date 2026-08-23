@@ -16,11 +16,14 @@ export function Cursor() {
     setEnabled(true);
 
     const move = (e: PointerEvent) => {
+      if (x.get() === e.clientX && y.get() === e.clientY) return;
+      
       x.set(e.clientX);
       y.set(e.clientY);
       const el = (e.target as HTMLElement)?.closest?.("[data-cursor]") as HTMLElement | null;
       const next = el?.dataset['cursor'];
-      setMode(next === "view" ? "view" : next === "link" ? "link" : "default");
+      const targetMode = next === "view" ? "view" : next === "link" ? "link" : "default";
+      setMode(prev => prev === targetMode ? prev : targetMode);
     };
     window.addEventListener("pointermove", move, { passive: true });
     return () => window.removeEventListener("pointermove", move);
@@ -33,24 +36,24 @@ export function Cursor() {
   return (
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none fixed left-0 top-0 z-[9999]"
+        className="pointer-events-none fixed left-0 top-0 z-[9999] mix-blend-difference"
         style={{ x: sx, y: sy }}
       >
-      <motion.div
-        className="flex items-center justify-center rounded-full border border-accent"
-        animate={{
-          width: size,
-          height: size,
-          marginLeft: -size / 2,
-          marginTop: -size / 2,
-          backgroundColor: mode === "view" ? "var(--color-accent)" : "rgba(0,0,0,0)",
-        }}
-        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-      >
-        {mode === "view" && (
-          <span className="font-display text-[10px] uppercase tracking-[0.16em] text-accent-foreground">View</span>
-        )}
+        <motion.div
+          className="flex items-center justify-center rounded-full border border-accent"
+          animate={{
+            width: size,
+            height: size,
+            marginLeft: -size / 2,
+            marginTop: -size / 2,
+            backgroundColor: mode === "view" ? "var(--color-accent)" : "rgba(0,0,0,0)",
+          }}
+          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+        >
+          {mode === "view" && (
+            <span className="font-display text-[10px] uppercase tracking-[0.16em] text-accent-foreground">View</span>
+          )}
+        </motion.div>
       </motion.div>
-    </motion.div>
   );
 }

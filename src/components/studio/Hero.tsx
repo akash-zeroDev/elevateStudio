@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion, useMotionValue, useSpring, useAnimationFrame } from "motion/react";
-import { cn } from "@/lib/utils";
+
 
 export function Hero() {
   const reduced = useReducedMotion();
@@ -128,7 +128,7 @@ export function Hero() {
         </motion.div>
 
         {/* Paper / Ink Texture (Print Materiality) */}
-        <div className="absolute inset-0 opacity-[0.05] mix-blend-overlay pointer-events-none" style={{ backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')" }} />
+        <div className="absolute inset-0 opacity-[0.05] mix-blend-overlay pointer-events-none" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E\")" }} />
         
         {/* Subtle vignetting to ensure typography remains perfectly readable in the center */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#0a0a0c_100%)] opacity-70 pointer-events-none" />

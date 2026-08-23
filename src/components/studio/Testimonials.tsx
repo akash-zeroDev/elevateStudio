@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { testimonials } from "@/data/studio";
-import { Section } from "./primitives";
+import { Section, SectionLabel } from "./primitives";
 import { cn } from "@/lib/utils";
 
 export function Testimonials() {
@@ -16,13 +16,16 @@ export function Testimonials() {
     
     const timer = setInterval(() => {
       setI((prev) => (prev + 1) % testimonials.length);
-    }, 2000);
+    }, 4000);
     
     return () => clearInterval(timer);
   }, [isPlaying, testimonials.length]);
 
   return (
     <Section id="testimonials">
+      <div className="mb-[clamp(2.5rem,6vh,4rem)]">
+        <SectionLabel index="04">Client Testimonials</SectionLabel>
+      </div>
       <div className="grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-9">
           <AnimatePresence mode="wait">

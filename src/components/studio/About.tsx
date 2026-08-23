@@ -1,187 +1,221 @@
-import { useEffect, useRef, type CSSProperties, type PointerEvent, type ReactNode } from "react";
-import founderOne from "@/assets/founder.png"; 
+import { useEffect, useRef, useState } from "react";
 
-const MANIFESTO = [
-  "A small team with big standards.",
-  "Every detail is owned by the people building it.",
-  "No middlemen. No shortcuts. Just craft.",
-];
 
-const FOUNDERS = [
+const member1 = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80";
+const member2 = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80";
+const member3 = "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80";
+
+const team = [
   {
-    img: founderOne,
-    name: "Akash",
-    role: "Founder & Lead Engineer",
-    note: "Breaks things until they work beautifully.",
+    name: "Aarav Mehta",
+    role: "Creative Director",
+    line: "Sets the direction, protects the idea, argues for the simpler version.",
+    tags: ["Strategy", "Art direction", "Brand"],
+    image: member1,
+    since: "2019",
   },
   {
-    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
-    name: "Rishu",
-    role: "Co-founder & Marketer",
-    note: "Makes it move like it means it.",
+    name: "Elena Ruiz",
+    role: "Product Designer",
+    line: "Maps the flows, removes friction, then makes the interface feel obvious.",
+    tags: ["UI / UX", "Design systems", "Prototyping"],
+    image: member2,
+    since: "2020",
+  },
+  {
+    name: "Noah Bergman",
+    role: "Engineering Lead",
+    line: "Turns the file into a real product — typed, fast, accessible, shipped.",
+    tags: ["React / TS", "Architecture", "Performance"],
+    image: member3,
+    since: "2021",
   },
 ];
 
-function Reveal({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
+const stats = [
+  { value: "10", label: "Products shipped" },
+  { value: "1 yr", label: "Average experience" },
+  { value: "3", label: "People, no layers" },
+];
+
+const marquee = [
+  "Small team",
+  "Direct access",
+  "No handoffs",
+  "Weekly demos",
+  "Design + engineering",
+  "Built to last",
+];
+
+function useReveal<T extends HTMLElement>() {
+  const ref = useRef<T | null>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el) {
+      setVisible(true);
+      return;
+    }
+    
+    // Fallback: forcefully reveal after 1.5s just in case observer fails
+    const fallback = setTimeout(() => setVisible(true), 1500);
+
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry?.isIntersecting) {
-          el.classList.add("is-in");
+        if (entry?.isIntersecting || entry?.boundingClientRect.top < window.innerHeight) {
+          setVisible(true);
           io.disconnect();
+          clearTimeout(fallback);
         }
       },
-      { threshold: 0.25 },
+      { threshold: 0.05, rootMargin: "100px" },
     );
+    
     io.observe(el);
-    return () => io.disconnect();
+    return () => {
+      io.disconnect();
+      clearTimeout(fallback);
+    };
   }, []);
 
+  return { ref, visible };
+}
+
+function MemberCard({ member, index }: { member: (typeof team)[number]; index: number }) {
+  const { ref, visible } = useReveal<HTMLElement>();
+
   return (
-    <div
+    <article
       ref={ref}
-      className={`reveal ${className}`}
-      style={{ "--rd": `${delay}s` } as CSSProperties}
+      data-visible={visible ? "true" : "false"}
+      style={{ transitionDelay: `${index * 120}ms` } as React.CSSProperties}
+      className="member-card group flex h-full items-start gap-5 rounded-2xl border border-border bg-foreground/[0.04] p-5 opacity-0 translate-y-7 transition-all duration-900 ease-[cubic-bezier(0.16,1,0.3,1)] data-[visible=true]:opacity-100 data-[visible=true]:translate-y-0"
     >
-      {children}
-    </div>
+      <div className="relative shrink-0 overflow-hidden rounded-xl bg-white/[0.06]">
+        <img
+          src={member.image}
+          alt={`${member.name}, ${member.role}`}
+          loading="lazy"
+          width={160}
+          height={200}
+          className="portrait-img h-28 w-20 object-cover sm:h-32 sm:w-24"
+        />
+        <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border border-border bg-background font-display text-[0.55rem] tracking-[0.18em] text-accent uppercase">
+          0{index + 1}
+        </span>
+      </div>
+
+      <div className="relative z-10 flex min-w-0 flex-1 flex-col">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <h3 className="font-display text-xl font-extrabold tracking-tight text-foreground">
+              {member.name}
+            </h3>
+            <p className="mt-0.5 font-serif text-base italic text-accent">{member.role}</p>
+          </div>
+          <span className="hidden shrink-0 rounded-full border border-border bg-background/70 px-2 py-1 font-display text-[0.55rem] tracking-[0.18em] text-muted-foreground uppercase backdrop-blur sm:block">
+            Since {member.since}
+          </span>
+        </div>
+
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{member.line}</p>
+
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {member.tags.map((tag) => (
+            <li
+              key={tag}
+              className="rounded-full border border-border px-2.5 py-1 font-display text-[0.6rem] tracking-[0.14em] text-muted-foreground uppercase transition-colors duration-300 hover:border-accent/60 hover:text-accent"
+            >
+              {tag}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </article>
   );
 }
 
 export function About() {
-  const stageRef = useRef<HTMLElement>(null);
-
-  const handleStageMove = (e: PointerEvent<HTMLElement>) => {
-    const el = stageRef.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    el.style.setProperty("--my", `${e.clientY - r.top}px`);
-    el.style.setProperty("--px", (((e.clientX - r.left) / r.width) * 2 - 1).toFixed(3));
-    el.style.setProperty("--py", (((e.clientY - r.top) / r.height) * 2 - 1).toFixed(3));
-  };
-
-  const handleCardMove = (e: PointerEvent<HTMLElement>) => {
-    const el = e.currentTarget;
-    const r = el.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5;
-    const y = (e.clientY - r.top) / r.height - 0.5;
-    el.style.setProperty("--rx", `${(-y * 8).toFixed(2)}deg`);
-    el.style.setProperty("--ry", `${(x * 10).toFixed(2)}deg`);
-  };
-
-  const handleCardLeave = (e: PointerEvent<HTMLElement>) => {
-    e.currentTarget.style.setProperty("--rx", "0deg");
-    e.currentTarget.style.setProperty("--ry", "0deg");
-  };
+  const heading = useReveal<HTMLDivElement>();
+  const statsBlock = useReveal<HTMLDivElement>();
 
   return (
-    <section 
-      id="about" 
-      ref={stageRef} 
-      onPointerMove={handleStageMove} 
-      className="about-stage relative min-h-[100svh] overflow-x-clip bg-background font-display py-20"
-    >
-      {/* Glow and Grain */}
-      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(560px_circle_at_var(--mx,70%)_var(--my,30%),color-mix(in_oklab,var(--color-accent)_10%,transparent),transparent_70%)]" aria-hidden="true" />
-      <div className="about-grain fixed inset-[-50%] pointer-events-none opacity-[0.06]" aria-hidden="true" />
+    <section id="about" className="veil relative overflow-hidden bg-background py-24 sm:py-32">
+      <span className="orbit-dot absolute left-1/2 top-24 hidden h-3 w-3 rounded-full border border-accent lg:block" />
 
-      {/* Hero */}
-      <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-12 pt-[clamp(5rem,14vh,8rem)] pb-[3rem] transition-transform duration-400 ease-[cubic-bezier(0.2,0.8,0.2,1)]" style={{ transform: 'translate(calc(var(--px, 0) * -10px), calc(var(--py, 0) * -8px))' }}>
-        
-        <h1 className="about-title group mt-[clamp(1.8rem,4.5vh,3rem)] font-bold text-[clamp(2.6rem,8.6vw,7.4rem)] leading-[1.02] tracking-[-0.03em] uppercase cursor-default">
-          <span className="block overflow-hidden mb-[clamp(1rem,2.5vh,1.6rem)]" aria-hidden="true">
-            <span className="about-kicker-inner inline-block font-serif italic font-normal text-[clamp(1.15rem,2.2vw,1.7rem)] tracking-normal normal-case text-muted-foreground">
-              the people behind El Studio
-            </span>
-          </span>
-          <span className="flex items-center gap-[0.22em] overflow-hidden py-[0.06em]" aria-hidden="true">
-            <span className="inline-block animate-[line-up_1s_backwards_cubic-bezier(0.16,0.7,0.3,1)]" style={{ animationDelay: "0.3s" }}>
-              A team
-            </span>
-            <span className="about-chip flex-shrink-0 inline-block h-[0.72em] w-[1.55em] rounded-full overflow-hidden shrink-0 transition-[width] duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:w-[2.6em]" style={{ animationDelay: "0.85s" }}>
-              <img src={founderOne} alt="" width={320} height={160} className="w-full h-full object-cover block grayscale contrast-[1.05] transition-all duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:grayscale-0 group-hover:scale-110" />
-            </span>
-            <span className="inline-block animate-[line-up_1s_backwards_cubic-bezier(0.16,0.7,0.3,1)]" style={{ animationDelay: "0.42s" }}>
-              of
-            </span>
-          </span>
-          <span className="flex items-center gap-[0.22em] overflow-hidden py-[0.06em]" aria-hidden="true">
-            <span className="inline-block animate-[line-up_1s_backwards_cubic-bezier(0.16,0.7,0.3,1)]" style={{ animationDelay: "0.55s" }}>
-              makers
-            </span>
-            <span
-              className="inline-block animate-[line-up_1s_backwards_cubic-bezier(0.16,0.7,0.3,1)] font-serif italic font-normal lowercase tracking-normal text-muted-foreground"
-              style={{ animationDelay: "0.7s" }}
-            >
-              with <em className="relative text-accent not-italic font-serif about-em-hover">one standard.</em>
-            </span>
-          </span>
-        </h1>
-
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-10 mt-[clamp(2.2rem,6vh,3.6rem)] animate-[intro-fade_0.9s_1.15s_backwards]">
-          <p className="m-0 max-w-[26ch] pt-4 border-t border-muted-foreground/35 text-[clamp(1rem,1.5vw,1.25rem)] leading-relaxed text-muted-foreground">
-            We are a small, focused crew building the future of <em className="font-serif text-[1.15em] text-accent">El Studio</em> — one decision, one prototype, one launch at a time.
+      <div className="mx-auto w-full max-w-6xl px-6">
+        <div 
+          ref={heading.ref} 
+          data-visible={heading.visible ? "true" : "false"} 
+          className="opacity-0 translate-y-7 transition-all duration-900 ease-[cubic-bezier(0.16,1,0.3,1)] data-[visible=true]:opacity-100 data-[visible=true]:translate-y-0"
+        >
+          <p className="font-display text-[0.68rem] tracking-[0.32em] text-accent uppercase">
+            About the studio
           </p>
-          <ul className="list-none flex flex-wrap md:flex-nowrap gap-7 m-0 p-0 pb-1.5 text-[0.65rem] tracking-[0.3em] uppercase text-muted-foreground">
-            <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-accent" />Based in Delhi, India</li>
-            <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-accent" />Est. 2026</li>
-          </ul>
-        </div>
-      </div>
 
-      <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-12 py-[clamp(2rem,6vh,4rem)] pb-[clamp(4rem,8vh,6rem)] grid grid-cols-1 md:grid-cols-[1.05fr_1fr] gap-[clamp(2.5rem,6vw,6rem)] items-start">
-        <div>
-          {MANIFESTO.map((line, i) => (
-            <Reveal key={line} delay={i * 0.12}>
-              <p className="m-0 mb-[1.7rem] text-[clamp(1.4rem,2.5vw,2.1rem)] font-semibold leading-[1.25] tracking-[-0.01em] text-foreground">{line}</p>
-            </Reveal>
+          <h2 className="mt-6 font-display text-5xl leading-[0.9] font-extrabold tracking-tight text-foreground sm:text-7xl">
+            <span className="marker-underline inline-block" data-visible={heading.visible ? "true" : "false"}>
+              THREE
+            </span>{" "}
+            PEOPLE,
+            <br />
+            <span className="font-serif text-4xl font-normal italic text-muted-foreground sm:text-6xl">
+              one room.
+            </span>
+          </h2>
+
+          <div className="mt-10 grid gap-10 border-t border-border pt-10 md:grid-cols-2">
+            <p className="max-w-lg text-base leading-relaxed text-muted-foreground">
+              Elevate Studio is a three-person freelance team. The people you meet in the
+              first call are the people who design, build and ship your product — there is
+              no account layer and nothing gets passed down.
+            </p>
+            <p className="max-w-lg text-base leading-relaxed text-muted-foreground md:justify-self-end">
+              We take a small number of projects at a time so each one gets real attention.
+              Strategy, interface and engineering sit at the same table, which is why the
+              thing we present is the thing that actually runs.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-16 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {team.map((member, i) => (
+            <MemberCard key={member.name} member={member} index={i} />
           ))}
         </div>
 
-        <div className="relative">
-          {FOUNDERS.map((f, i) => (
-            <Reveal
-              key={f.name}
-              delay={0.15 + i * 0.18}
-              className={i === 1 ? "md:mt-[clamp(2rem,6vw,5.5rem)] md:ml-[clamp(0rem,4vw,2.5rem)] mt-8" : ""}
+        <div
+          ref={statsBlock.ref}
+          data-visible={statsBlock.visible ? "true" : "false"}
+          className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border lg:grid-cols-3 opacity-0 translate-y-7 transition-all duration-900 ease-[cubic-bezier(0.16,1,0.3,1)] data-[visible=true]:opacity-100 data-[visible=true]:translate-y-0"
+        >
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="group bg-background px-6 py-10 transition-colors duration-500 hover:bg-foreground/[0.04]"
             >
-              <article
-                className="group relative border border-muted-foreground/25 rounded-2xl bg-foreground/[0.04] p-4 transition-all duration-[0.35s] ease-[cubic-bezier(0.2,0.8,0.2,1)] hover:border-accent/50 hover:shadow-[0_24px_60px_-24px_rgba(52,211,153,0.3)]"
-                onPointerMove={handleCardMove}
-                onPointerLeave={handleCardLeave}
-                style={{ transform: 'perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))' }}
-              >
-                <div className="absolute left-[1.6rem] top-[1.6rem] w-4 h-4 border-l-2 border-t-2 border-accent opacity-0 translate-x-1 translate-y-1 transition-all duration-300 z-10 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0" />
-                <div className="overflow-hidden rounded-xl aspect-[4/5]">
-                  <img
-                    src={f.img}
-                    alt={`Portrait of ${f.name}`}
-                    width={800}
-                    height={1000}
-                    loading="lazy"
-                    className="w-full h-full object-cover block grayscale contrast-[1.05] scale-[1.01] transition-all duration-600 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:grayscale-0 group-hover:scale-[1.06]"
-                  />
-                </div>
-                <div>
-                  <h2 className="mt-4 mb-1 font-display text-[1.4rem] tracking-[-0.01em] text-foreground">{f.name}</h2>
-                  <p className="m-0 text-[0.68rem] tracking-[0.3em] uppercase text-accent">{f.role}</p>
-                  <p className="mt-2 mb-1 text-[0.95rem] text-muted-foreground">{f.note}</p>
-                </div>
-              </article>
-            </Reveal>
+              <p className="font-display text-4xl font-extrabold tracking-tight text-foreground transition-colors duration-500 group-hover:text-accent">
+                {stat.value}
+              </p>
+              <p className="mt-2 font-display text-[0.62rem] tracking-[0.22em] text-muted-foreground uppercase">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-20 flex w-full overflow-hidden border-y border-border py-5">
+        <div className="ticker-track flex shrink-0 gap-10 pr-10">
+          {[...marquee, ...marquee].map((item, i) => (
+            <span
+              key={`${item}-${i}`}
+              className="flex shrink-0 items-center gap-10 font-display text-sm tracking-[0.28em] text-muted-foreground uppercase"
+            >
+              {item}
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+            </span>
           ))}
         </div>
       </div>

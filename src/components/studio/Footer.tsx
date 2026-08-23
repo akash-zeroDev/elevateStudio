@@ -1,80 +1,107 @@
-import { nav, socials, studio } from "@/data/studio";
-import { ArrowLink, LineReveal } from "./primitives";
+import { useState, type FormEvent } from "react";
+import { ArrowUpRight, Plus } from "lucide-react";
+import elLogo from "@/assets/El.png";
+
+const columns = [
+  {
+    title: "Studio",
+    links: ["How we work", "Services", "Selected work", "Process", "About"],
+  },
+  {
+    title: "Company",
+    links: ["Contact", "Journal", "Careers", "Privacy policy"],
+  },
+];
+
+const socials = ["Dribbble", "LinkedIn", "Instagram", "X"];
 
 export function Footer() {
   return (
-    <footer className="grain border-t border-border px-5 pb-10 pt-24 sm:px-8 lg:px-14">
-      <h2 className="display-xl text-[16vw] leading-[0.84] lg:text-[11vw]">
-        <LineReveal lines={[<>Let's make</>, <>something</>, <>
-          <span className="text-accent">good.</span>
-        </>]} />
-      </h2>
+    <footer className="veil relative overflow-hidden border-t border-border bg-background pt-20">
+      <div className="mx-auto w-full max-w-6xl px-6">
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.4fr)]">
+          {/* Brand card */}
+          <div className="relative flex min-h-[16rem] flex-col justify-between overflow-hidden rounded-3xl bg-accent p-7">
+            <div className="flex items-center gap-2.5">
+              <span className="grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-xl bg-background/90">
+                <img src={elLogo} alt="Elevate" className="h-full w-full object-cover" />
+              </span>
+              <span className="font-display text-2xl font-extrabold tracking-tight text-background">
+                ELEVATE
+              </span>
+            </div>
 
-      <div className="mt-12 border-b border-border pb-12">
-        <ArrowLink href="#contact" variant="outline">
-          Start a project
-        </ArrowLink>
+            <p className="mt-10 max-w-[16rem] font-display text-sm leading-relaxed font-semibold text-background">
+              Design and engineering for products that ship.
+              <span className="block font-serif text-lg italic font-normal opacity-70">
+                Three people, one room.
+              </span>
+            </p>
+          </div>
+
+          {/* Panel */}
+          <div className="member-card rounded-3xl border border-border bg-foreground/[0.04] p-7 sm:p-9">
+            <div className="relative z-10 grid gap-10 sm:grid-cols-2">
+              {columns.map((col) => (
+                <div key={col.title}>
+                  <p className="font-display text-[0.6rem] tracking-[0.28em] text-muted-foreground uppercase">
+                    {col.title}
+                  </p>
+                  <ul className="mt-5 space-y-3">
+                    {col.links.map((link) => (
+                      <li key={link}>
+                        <a
+                          href="#"
+                          className="group inline-flex items-center gap-1.5 font-display text-[0.95rem] font-semibold text-foreground transition-colors hover:text-accent"
+                        >
+                          <span>{link}</span>
+                          <ArrowUpRight className="h-3.5 w-3.5 text-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            <div className="relative z-10 mt-10 flex flex-wrap gap-2">
+              {socials.map((s) => (
+                <a
+                  key={s}
+                  href="#"
+                  data-cursor="link"
+                  className="rounded-full border border-border bg-background/50 px-3 py-1.5 font-display text-[0.65rem] font-medium tracking-[0.12em] text-muted-foreground uppercase transition-colors hover:border-border-strong hover:text-foreground"
+                >
+                  {s}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-10 flex flex-col gap-3 border-t border-border py-8 sm:flex-row sm:items-center sm:justify-between">
+          <p className="font-display text-[0.65rem] tracking-[0.2em] text-muted-foreground uppercase">
+            © {new Date().getFullYear()} Elevate Studio. All rights reserved.
+          </p>
+          <p className="flex items-center gap-2 font-display text-[0.65rem] tracking-[0.2em] text-muted-foreground uppercase">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
+            Available for two projects
+          </p>
+        </div>
       </div>
 
-      <div className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
-        <nav aria-label="Footer">
-          <h3 className="label-meta">Menu</h3>
-          <ul className="mt-4 space-y-2">
-            {nav.map((n) => (
-              <li key={n.href}>
-                <a
-                  href={n.href}
-                  data-cursor="link"
-                  className="link-underline text-sm text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {n.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div>
-          <h3 className="label-meta">Elsewhere</h3>
-          <ul className="mt-4 space-y-2">
-            {socials.map((s) => (
-              <li key={s.label}>
-                <a
-                  href={s.href}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  data-cursor="link"
-                  className="link-underline text-sm text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {s.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="label-meta">Contact</h3>
-          <a
-            href={`mailto:${studio.email}`}
-            data-cursor="link"
-            className="link-underline mt-4 inline-block text-sm text-accent"
-          >
-            {studio.email}
-          </a>
-        </div>
-
-        <div>
-          <h3 className="label-meta">Location</h3>
-          <p className="mt-4 text-sm text-muted-foreground">{studio.location}</p>
-        </div>
-      </div>
-
-      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
-        <p className="label-meta">
-          © {studio.year} {studio.fullName}
+      <div aria-hidden className="relative mt-8 select-none overflow-hidden px-4 md:px-12 flex justify-center translate-y-[20%]">
+        <p 
+          className="font-display font-extrabold tracking-tight"
+          style={{ 
+            fontSize: "clamp(6rem, 22vw, 25rem)", 
+            lineHeight: 0.75,
+            WebkitTextStroke: "1px color-mix(in oklab, var(--color-accent) 25%, transparent)",
+            color: "transparent"
+          }}
+        >
+          ELEVATE
         </p>
-        <p className="label-meta">Built with intention.</p>
       </div>
     </footer>
   );

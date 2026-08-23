@@ -1,0 +1,90 @@
+@utility veil {
+  background-image: radial-gradient(
+    120% 90% at 15% 0%,
+    color-mix(in oklab, var(--color-accent) 10%, transparent),
+    transparent 60%
+  );
+}
+
+@utility text-glow {
+  text-shadow: 0 0 60px -10px color-mix(in oklab, var(--color-accent) 55%, transparent);
+}
+
+
+@utility member-card {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s ease,
+    box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    transform: translateY(-8px);
+    border-color: color-mix(in oklab, var(--color-accent) 45%, transparent);
+    box-shadow: 0 30px 80px -40px oklch(0 0 0 / 0.9);
+  }
+}
+
+@utility portrait-img {
+  filter: grayscale(1) contrast(1.05);
+  transition:
+    filter 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .member-card:hover & {
+    filter: grayscale(0.15) contrast(1.1);
+    transform: scale(1.08);
+  }
+}
+
+@utility marker-underline {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0.08em;
+    height: 0.14em;
+    width: 100%;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+  }
+
+  &[data-visible="true"]::after {
+    transform: scaleX(1);
+  }
+}
+
+@utility orbit-dot {
+  animation: orbit-pulse 3.4s ease-in-out infinite;
+}
+
+@keyframes orbit-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes ticker {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility ticker-track {
+  animation: ticker 26s linear infinite;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}

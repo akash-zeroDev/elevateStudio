@@ -4,17 +4,26 @@ import { LineReveal, Section } from "./primitives";
 export function Philosophy() {
   return (
     <Section id="philosophy" className="overflow-visible pb-0 md:pb-0 lg:pb-0">
-      <h2 className="display-xl text-[11vw] leading-[0.88] lg:text-[7.5vw] mb-20">
-        <LineReveal
-          lines={[
-            <>Small team.</>,
-            <>Direct talk.</>,
-            <>
-              No corporate <span className="font-serif italic text-foreground/80">theater.</span>
-            </>,
-          ]}
-        />
-      </h2>
+      <div className="mb-24 lg:mb-32 max-w-[90vw]">
+        <div className="flex items-center gap-4 mb-10">
+          <div className="h-px w-12 bg-accent"></div>
+          <p className="text-xs font-display tracking-[0.25em] text-accent uppercase">
+            Studio Tenets
+          </p>
+        </div>
+        <h2 className="font-display text-[clamp(3rem,8vw,7.5rem)] leading-[0.88] font-bold tracking-[-0.04em]">
+          <LineReveal
+            lines={[
+              <span key="1" className="block text-foreground">Substance</span>,
+              <span key="2" className="block flex items-center gap-4 md:gap-8">
+                <em className="font-serif italic font-light text-muted-foreground pr-2">over</em>
+                <span className="text-foreground">spectacle.</span>
+                <span className="hidden md:block h-[3px] flex-1 bg-border mt-3 max-w-sm rounded-full"></span>
+              </span>,
+            ]}
+          />
+        </h2>
+      </div>
 
       {/* 
         Sticky Stacking Cards Container
