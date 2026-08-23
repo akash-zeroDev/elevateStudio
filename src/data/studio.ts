@@ -16,7 +16,6 @@ export const studio = {
 
 export const nav = [
   { label: "Home", href: "/" },
-  { label: "Work", href: "/work" },
   { label: "Studio", href: "/studio" },
 ];
 
@@ -188,26 +187,26 @@ export const stack = ["React", "TypeScript", "Next / TanStack", "Tailwind", "Mot
 export const testimonials = [
   {
     quote:
-      "Working with the studio felt less like hiring an agency and more like having an experienced product person on our team.",
-    name: "Ishita Raman",
-    role: "Founder, Ledgerline",
+      "They understood the quiet restraint our architecture requires. The website feels exactly like walking into one of our spaces.",
+    name: "Lars Jensen",
+    role: "Partner, Studio Nørd",
   },
   {
     quote:
-      "They pushed back on half of what we asked for, and they were right about most of it. The site is the best thing our brand has.",
-    name: "Marc Devlin",
-    role: "Creative Director, Aurel Atelier",
+      "Our conversion rate doubled within a month of launch. The checkout experience is as elegant as the garments we design.",
+    name: "Aurelia Rossi",
+    role: "Founder, Maison Aurelia",
   },
   {
     quote:
-      "Two people moved faster than the twelve-person agency we used before, and the handover was actually documented.",
-    name: "Sofia Klein",
-    role: "Head of Growth, Northbeam",
+      "We needed a platform that board members could trust instantly. The data visualizations are flawless and the dashboard performs beautifully under heavy loads.",
+    name: "Sarah Chen",
+    role: "CTO, Aura Analytics",
   },
   {
-    quote: "Direct, honest, and genuinely good at the craft. We've kept them on retainer since.",
-    name: "Arjun Mehta",
-    role: "Co-founder, Orbit Collective",
+    quote: "Since launching the new franchise portal, our daily franchise inquiries have tripled. The site handles the massive traffic perfectly.",
+    name: "Rohan Patel",
+    role: "Director, Cafe Name",
   },
 ];
 

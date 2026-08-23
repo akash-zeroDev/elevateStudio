@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, Loader2, Send, Sparkles } from "lucide-react";
+import { toast } from "sonner";
 
 import {
   submitInquiry,
@@ -79,7 +80,7 @@ export function Contact() {
       window.setTimeout(() => setSubmitted(false), 5000);
     } catch (err) {
       const message = err instanceof Error ? err.message : "Something went wrong";
-      alert(message);
+      toast.error(message);
     } finally {
       setSubmitting(false);
     }

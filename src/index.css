@@ -405,3 +405,13 @@
     transform: scale(0.98);
   }
 }
+
+/* ---------- Immersive Mode Utilities ---------- */
+header {
+  transition: opacity 0.5s ease;
+}
+
+body.immersive-mode header {
+  opacity: 0;
+  pointer-events: none !important;
+}

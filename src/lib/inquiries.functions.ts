@@ -25,11 +25,12 @@ export const inquirySchema = z.object({
 export type InquiryInput = z.input<typeof inquirySchema>;
 export type InquiryOutput = z.infer<typeof inquirySchema>;
 
+import { supabase } from "@/integrations/supabase/client";
+
 export const submitInquiry = async ({ data }: { data: InquiryOutput }) => {
   const parsedData = inquirySchema.parse(data);
-  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-  const { error } = await supabaseAdmin.from("project_inquiries").insert({
+  const { error } = await supabase.from("project_inquiries").insert({
     name: parsedData.name,
     email: parsedData.email,
     company: parsedData.company || null,
@@ -42,6 +43,16 @@ export const submitInquiry = async ({ data }: { data: InquiryOutput }) => {
   if (error) {
     console.error("Inquiry insert failed:", error);
     throw new Error("We couldn't save your inquiry. Please try again.");
+  }
+
+  // Bypass the Database Webhook by calling the Edge Function directly from the client!
+  // This avoids issues with pg_net being disabled due to project usage limits.
+  const { error: fnError } = await supabase.functions.invoke("notify_inquiry", {
+    body: { record: parsedData },
+  });
+
+  if (fnError) {
+    console.error("Failed to send email notification:", fnError);
   }
 
   return { ok: true };
