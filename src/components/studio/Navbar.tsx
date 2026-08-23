@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { nav, studio } from "@/data/studio";
 import { cn } from "@/lib/utils";
@@ -9,21 +10,12 @@ export function Navbar() {
   const [hovered, setHovered] = useState<string | null>(null);
   const reduced = useReducedMotion();
 
+  const routerState = useRouterState();
+  const currentPath = routerState.location.pathname;
+
   useEffect(() => {
-    const sections = nav
-      .map((n) => document.querySelector(n.href))
-      .filter(Boolean) as Element[];
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(`#${e.target.id}`);
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    sections.forEach((s) => obs.observe(s));
-    return () => obs.disconnect();
-  }, []);
+    setActive(currentPath);
+  }, [currentPath]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -73,9 +65,9 @@ export function Navbar() {
               const isTarget = hovered === item.href || (hovered === null && isActive);
               
               return (
-                <a
+                <Link
                   key={item.href}
-                  href={item.href}
+                  to={item.href}
                   data-cursor="link"
                   onMouseEnter={() => setHovered(item.href)}
                   className={cn(
@@ -91,19 +83,19 @@ export function Navbar() {
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
-                </a>
+                </Link>
               );
             })}
           </nav>
 
           {/* CTA Button - Right Aligned Desktop */}
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             data-cursor="link"
             className="pointer-events-auto hidden bg-accent px-5 py-2.5 font-display text-[11px] font-bold uppercase tracking-[0.16em] text-accent-foreground transition-colors duration-300 hover:bg-accent/90 md:inline-block"
           >
             Start a project
-          </a>
+          </Link>
         </div>
       </header>
 
@@ -119,10 +111,12 @@ export function Navbar() {
             <nav aria-label="Mobile" className="flex flex-col">
               {nav.map((item, i) => (
                 <div key={item.href} className="overflow-hidden border-b border-border">
-                  <motion.a
-                    href={item.href}
+                  <Link
+                    to={item.href}
                     onClick={() => setOpen(false)}
                     className="block py-4 font-display text-4xl uppercase tracking-[-0.03em]"
+                    // @ts-ignore - motion props don't typecheck perfectly on custom components sometimes
+                    as={motion.a}
                     initial={reduced ? false : { y: "110%" }}
                     animate={reduced ? {} : { y: 0 }}
                     transition={{ delay: 0.15 + i * 0.07, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -131,7 +125,7 @@ export function Navbar() {
                       0{i + 1}
                     </span>
                     {item.label}
-                  </motion.a>
+                  </Link>
                 </div>
               ))}
             </nav>
