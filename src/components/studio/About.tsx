@@ -1,41 +1,39 @@
 import { useEffect, useRef, useState } from "react";
-
-
-const member1 = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80";
+import member1 from "@/assets/founder.png";
 const member2 = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80";
 const member3 = "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80";
 
 const team = [
   {
-    name: "Aarav Mehta",
-    role: "Creative Director",
-    line: "Sets the direction, protects the idea, argues for the simpler version.",
-    tags: ["Strategy", "Art direction", "Brand"],
+    name: "Akash",
+    role: "Founder & Engineer",
+    line: "Builds high-performance websites and digital products from the ground up.",
+    tags: ["Nextjs", "Mongodb", "React"],
     image: member1,
-    since: "2019",
+    since: "2026",
   },
   {
-    name: "Elena Ruiz",
-    role: "Product Designer",
-    line: "Maps the flows, removes friction, then makes the interface feel obvious.",
-    tags: ["UI / UX", "Design systems", "Prototyping"],
+    name: "Rishu",
+    role: "Co-founder, Marketing & Growth",
+    line: "Scales the vision, drives growth strategy, and ensures the product reaches the right audience.",
+    tags: ["Marketing", "Growth Strategy", "Go-to-market"],
     image: member2,
-    since: "2020",
+    since: "2026",
   },
   {
-    name: "Noah Bergman",
-    role: "Engineering Lead",
-    line: "Turns the file into a real product — typed, fast, accessible, shipped.",
-    tags: ["React / TS", "Architecture", "Performance"],
+    name: "Noah",
+    role: "Full Stack Developer",
+    line: "Builds robust backend architectures and seamless frontend experiences.",
+    tags: ["NextJs", "SQL", "React"],
     image: member3,
-    since: "2021",
+    since: "2026",
   },
 ];
 
 const stats = [
-  { value: "10", label: "Products shipped" },
-  { value: "1 yr", label: "Average experience" },
+  { value: "10+", label: "Products shipped" },
   { value: "3", label: "People, no layers" },
+  { value: "100%", label: "Direct access" },
 ];
 
 const marquee = [

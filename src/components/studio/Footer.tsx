@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { ArrowUpRight, Plus } from "lucide-react";
-import elLogo from "@/assets/El.png";
+import elLogo from "@/assets/elevate-studio-logo.png";
 
 const columns = [
   {
@@ -13,8 +13,6 @@ const columns = [
   },
 ];
 
-const socials = ["Dribbble", "LinkedIn", "Instagram", "X"];
-
 export function Footer() {
   return (
     <footer className="veil relative overflow-hidden border-t border-border bg-background pt-20">
@@ -23,11 +21,11 @@ export function Footer() {
           {/* Brand card */}
           <div className="relative flex min-h-[16rem] flex-col justify-between overflow-hidden rounded-3xl bg-accent p-7">
             <div className="flex items-center gap-2.5">
-              <span className="grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-xl bg-background/90">
-                <img src={elLogo} alt="Elevate" className="h-full w-full object-cover" />
+              <span className="grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-xl bg-background/90 p-1.5">
+                <img src={elLogo} alt="Elevate" className="h-full w-full object-contain" />
               </span>
-              <span className="font-display text-2xl font-extrabold tracking-tight text-background">
-                ELEVATE
+              <span className="font-display text-2xl font-extrabold tracking-tight text-background uppercase">
+                STUDIO
               </span>
             </div>
 
@@ -61,19 +59,6 @@ export function Footer() {
                     ))}
                   </ul>
                 </div>
-              ))}
-            </div>
-
-            <div className="relative z-10 mt-10 flex flex-wrap gap-2">
-              {socials.map((s) => (
-                <a
-                  key={s}
-                  href="#"
-                  data-cursor="link"
-                  className="rounded-full border border-border bg-background/50 px-3 py-1.5 font-display text-[0.65rem] font-medium tracking-[0.12em] text-muted-foreground uppercase transition-colors hover:border-border-strong hover:text-foreground"
-                >
-                  {s}
-                </a>
               ))}
             </div>
           </div>
