@@ -72,16 +72,37 @@ export function Work() {
               }}
             >
               <AnimatePresence mode="popLayout">
+                {/* Background blurred layer (always object-cover) */}
                 <motion.img
-                  key={activeIndex}
+                  key={`bg-${activeIndex}`}
                   src={getImageUrl(activeProject.image)}
                   alt="Background"
                   className="absolute inset-0 h-full w-full object-cover"
                   initial={{ opacity: 0, scale: 1.05 }}
-                  animate={{ opacity: isImmersive ? 1 : 0.25, scale: 1 }}
+                  animate={{ 
+                    opacity: isImmersive ? 0.3 : 0.25, 
+                    scale: 1, 
+                    filter: isImmersive ? "blur(24px)" : "blur(0px)" 
+                  }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                 />
+              </AnimatePresence>
+
+              <AnimatePresence>
+                {/* Sharp foreground layer (object-contain on mobile) */}
+                {isImmersive && (
+                  <motion.img 
+                    key={`fg-${activeIndex}`}
+                    src={getImageUrl(activeProject.image)}
+                    alt="Project"
+                    className="absolute inset-0 h-full w-full object-contain md:object-cover"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                )}
               </AnimatePresence>
               {/* Gradient Overlay to ensure text readability */}
               <motion.div 

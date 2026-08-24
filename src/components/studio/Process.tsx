@@ -33,7 +33,7 @@ export function Process() {
         
         {/* The Rotating Wheel */}
         <motion.div
-          className="absolute top-1/2 left-[-20vw] md:left-0 -translate-x-1/2 -translate-y-1/2 rounded-full border border-border/40 w-[120vw] h-[120vw] md:w-[100vh] md:h-[100vh]"
+          className="absolute top-1/2 left-[-50vw] sm:left-[-30vw] md:left-0 -translate-x-1/2 -translate-y-1/2 rounded-full border border-border/40 w-[120vw] h-[120vw] md:w-[100vh] md:h-[100vh]"
           style={{ rotate: rotation }}
         >
           {processSteps.map((step, i) => (
@@ -58,7 +58,7 @@ export function Process() {
         </motion.div>
 
         {/* The Content */}
-        <div className="relative z-10 flex h-full w-full flex-col justify-center pl-[50vw] pr-6 md:pl-[55vh] md:pr-24 lg:pl-[60vh] xl:pl-[65vh]">
+        <div className="relative z-10 flex h-full w-full flex-col justify-center pl-[35vw] pr-4 sm:pl-[45vw] sm:pr-8 md:pl-[55vh] md:pr-24 lg:pl-[60vh] xl:pl-[65vh]">
           <h2 className="absolute top-10 right-6 md:right-14 md:top-14 font-display text-2xl tracking-widest text-muted-foreground/50 uppercase">
             How we work
           </h2>
@@ -73,7 +73,7 @@ export function Process() {
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               >
                 <span className="label-meta tracking-[0.2em] text-accent">Phase {processSteps[activeIndex].index}</span>
-                <h3 className="mt-4 mb-6 font-display text-5xl md:text-7xl uppercase leading-[0.9] tracking-[-0.02em]">
+                <h3 className="mt-4 mb-4 md:mb-6 font-display text-3xl sm:text-5xl md:text-7xl uppercase leading-[0.95] tracking-[-0.02em] break-words">
                   {processSteps[activeIndex].title}
                 </h3>
                 <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
